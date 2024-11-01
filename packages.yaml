@@ -1,12 +1,12 @@
 packages:
+  discord-canary:
+    type: build
   discord:
     type: mirror
     url: https://stable.dl2.discordapp.net/apps/linux/0.0.72/discord-0.0.72.deb
   age:
     type: mirror
     url: http://launchpadlibrarian.net/756688378/age_1.2.0-1_amd64.deb
-  discord-canary:
-    type: build
   files:
     type: build-docker
     versions: ["1.0.0"]

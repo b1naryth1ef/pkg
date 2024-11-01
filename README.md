@@ -1,8 +1,23 @@
 # pkg
 
-This repository contains both the contents of and the tooling required for generating the [hydr0 apt package repository](https://pkg.hydr0.com). This tooling is not designed for use outside of this repository, but it could be integrated into another project without too much pain.
+This repository contains a set of tools written in [deno](https://deno.land/) oriented around managing the [hydr0 apt repository](https://pkg.hydr0.com). This repository contains both custom built packages and packages being mirrored from other locations. This repository is primarily designed for use within hydr0 infrastructure, but its open for public use as well.
+
+## tools
+
+- [tools/build.ts](tools/build.ts) manages building deb packages based on the descriptions in [packages.yaml](packages.yaml)
+- [tools/release.ts](tools/release.ts) manages generating and signing apt release files for publishing the repository
+- [tools/docker.ts](tools/docker.ts) builds the docker image which is used to serve the public facing resources at [pkg.hydr0.com](https://pkg.hydr0.com)
 
 ## packages
+
+- discord - redistributes the official Discord deb file to make updating easier
+- discord-canary - same as the above but for the canary release of Discord
+- [age](https://github.com/FiloSottile/age) - mirrors the latest age from debian
+- [files](https://github.com/brngle/files) - custom file serving software
+- [yamon](https://github.com/b1naryth1ef/yamon) - custom observability tool
+- nut - custom video hosting software
+- [restic](https://github.com/restic/restic) - packages the official restic release
+- [tailwindcss](https://github.com/tailwindlabs/tailwindcss) - packages the official tailwindcss release
 
 - [discord](discord/build.ts) redistributes the latest stable deb into our repository for easy upgrading
 - [files](files/build.ts) personal software (currently private)
@@ -37,7 +52,3 @@ Package: *
 Pin: origin pkg.hydr0.com
 Pin-Priority: 1000
 ```
-
-## repository management
-
-Simply run `./run.sh` on a machine that has the private key imported into the users gpg keyring.
