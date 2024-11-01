@@ -140,7 +140,7 @@ export async function buildDocker(
     const args = ["docker", "build", "-t", `${name}:latest`, ...buildArgs, "."];
 
     const listOfFiles = desc.extract.join(" ");
-    await exec(args, { cwd: path, inherit: true });
+    await exec(args, { cwd: path });
     await exec([
       "docker",
       "run",

@@ -8,4 +8,4 @@ contents:
 homepage: https://github.com/swaywm/sway
 maintainer: Hydr0 Packaging <packaging@hydr0.com>
 depends:
-  - libwlroots-dev >= 0.18
+  - libwlroots-dev (>= 0.18)

@@ -7,3 +7,10 @@ contents:
   - src: tmp/wlroots/usr/local
     dst: /usr/local
     type: tree
+depends:
+  - libxcb-dri3-dev
+  - libxcb-present-dev
+  - libxcb-randr0-dev
+  - libxcb-render-util0-dev
+  - libxcb-res0-dev
+  - libxcb-sync-dev
