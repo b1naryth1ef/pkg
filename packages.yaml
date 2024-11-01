@@ -36,7 +36,7 @@ packages:
         {
           name: restic_$VERSION_linux_amd64.bz2,
           postProcess:
-            ["rm tmp/restic", "bzip2 -d tmp/restic.bz2", "chmod +x tmp/restic"],
+            ["bzip2 -df tmp/restic.bz2", "chmod +x tmp/restic"],
         }
   tailwindcss:
     type: github-release
