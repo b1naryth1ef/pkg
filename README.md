@@ -19,12 +19,6 @@ This repository contains a set of tools written in [deno](https://deno.land/) or
 - [restic](https://github.com/restic/restic) - packages the official restic release
 - [tailwindcss](https://github.com/tailwindlabs/tailwindcss) - packages the official tailwindcss release
 
-- [discord](discord/build.ts) redistributes the latest stable deb into our repository for easy upgrading
-- [files](files/build.ts) personal software (currently private)
-- [nut](nut/build.ts) personal software (currently private)
-- [restic](restic/build.ts) redistributes specific versions of restic for my infra use
-- [yamon](yamon/build.ts) monitoring software ([github.com/b1naryth1ef/yamon](https://github.com/b1naryth1ef/yamon))
-
 ## installation
 
 ### bootstrap package
