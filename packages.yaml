@@ -22,8 +22,11 @@ packages:
       - /bin/yamon-agent
       - /bin/yamon-debug
   nut:
-    type: build
-    versions: [0.0.3]
+    type: build-docker
+    versions: ["1.0.0"]
+    git: git@github.com:b1naryth1ef/nutv2.git
+    extract:
+      - /bin/nut
   restic:
     type: github-release
     repo: restic/restic
