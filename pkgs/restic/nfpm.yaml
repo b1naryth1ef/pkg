@@ -1,0 +1,6 @@
+name: restic
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/restic
+    dst: /usr/bin/restic

@@ -1,0 +1,6 @@
+/apt
+/key.private
+/pkgs/**/*.deb
+/bootstrap/**/*.deb
+/scratch.txt
+/tmp

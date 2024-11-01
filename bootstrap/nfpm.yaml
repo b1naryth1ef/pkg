@@ -1,0 +1,10 @@
+name: hydr0-pkg-repo
+arch: amd64
+version: 1.0.0
+contents:
+  - src: apt-preferences
+    dst: /etc/apt/preferences.d/hydr0
+  - src: public-key
+    dst: /usr/share/keyrings/hydr0.gpg
+  - src: apt-list
+    dst: /etc/apt/sources.list.d/hydr0.list

@@ -1,0 +1,6 @@
+name: nut
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/nut
+    dst: /usr/bin/nut

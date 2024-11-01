@@ -1,0 +1,6 @@
+name: tailwindcss
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/tailwindcss
+    dst: /usr/bin/tailwindcss

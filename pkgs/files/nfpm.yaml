@@ -1,0 +1,6 @@
+name: files
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/files-web-server
+    dst: /usr/bin/files-web-server

@@ -1,0 +1,10 @@
+name: yamon
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/yamon-agent
+    dst: /usr/bin/yamon-agent
+  - src: tmp/yamon-server
+    dst: /usr/bin/yamon-server
+  - src: tmp/yamon-debug
+    dst: /usr/bin/yamon-debug

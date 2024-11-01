@@ -1,0 +1,47 @@
+packages:
+  discord:
+    type: mirror
+    url: https://stable.dl2.discordapp.net/apps/linux/0.0.72/discord-0.0.72.deb
+  age:
+    type: mirror
+    url: http://launchpadlibrarian.net/756688378/age_1.2.0-1_amd64.deb
+  discord-canary:
+    type: build
+  files:
+    type: build-docker
+    versions: ["1.0.0"]
+    git: https://github.com/brngle/files.git
+    extract:
+      - /bin/files-web-server
+  yamon:
+    type: build-docker
+    versions: ["1.0.0"]
+    git: https://github.com/b1naryth1ef/yamon.git
+    extract:
+      - /bin/yamon-server
+      - /bin/yamon-agent
+      - /bin/yamon-debug
+  nut:
+    type: build
+    versions: [0.0.3]
+  restic:
+    type: github-release
+    repo: restic/restic
+    versions: [0.17.2]
+    files:
+      restic.bz2:
+        {
+          name: restic_$VERSION_linux_amd64.bz2,
+          postProcess:
+            ["rm tmp/restic", "bzip2 -d tmp/restic.bz2", "chmod +x tmp/restic"],
+        }
+  tailwindcss:
+    type: github-release
+    repo: tailwindlabs/tailwindcss
+    versions: ["3.4.14"]
+    files:
+      tailwindcss:
+        {
+          name: tailwindcss-linux-x64,
+          postProcess: ["chmod +x tmp/tailwindcss"],
+        }
