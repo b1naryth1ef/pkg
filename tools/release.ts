@@ -103,6 +103,7 @@ async function dpkgScanPackages() {
 
   const target = await Deno.open("dists/stable/main/binary-amd64/Packages.gz", {
     write: true,
+    create: true,
   });
 
   await new Blob([stdout])
