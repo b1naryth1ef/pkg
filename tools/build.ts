@@ -109,7 +109,7 @@ export async function buildDocker(
   desc: PackageDescriptionBuildDocker,
   ctx: BuildCtx
 ) {
-  const repoPath = `tmp/${name}-repo`;
+  let path;
 
   for (const version of desc.versions) {
     const outPath = `apt/pool/main/${name}_${version}_amd64.deb`;
@@ -117,16 +117,30 @@ export async function buildDocker(
       continue;
     }
 
-    if (!(await exists(repoPath))) {
-      await exec(`git clone --branch v${version} ${desc.git} tmp/${name}-repo`);
+    if (desc.git) {
+      path = `tmp/${name}-repo`;
+      if (!(await exists(path))) {
+        await exec(
+          `git clone --branch v${version} ${desc.git} tmp/${name}-repo`
+        );
+      } else {
+        await exec(`git fetch --tags`, { cwd: path });
+        await exec(`git checkout v${version}`, { cwd: path });
+        await exec(`git reset --hard`, { cwd: path });
+      }
+    } else if (desc.path) {
+      path = desc.path;
     } else {
-      await exec(`git fetch --tags`, { cwd: repoPath });
-      await exec(`git checkout v${version}`, { cwd: repoPath });
-      await exec(`git reset --hard`, { cwd: repoPath });
+      throw new Error(`path or git required for build-docker`);
     }
 
+    const buildArgs = Object.entries(desc.args || {}).map(
+      ([k, v]) => `--build-arg=${k}=${v}`
+    );
+    const args = ["docker", "build", "-t", `${name}:latest`, ...buildArgs, "."];
+
     const listOfFiles = desc.extract.join(" ");
-    await exec(`docker build -t ${name}:latest .`, { cwd: repoPath });
+    await exec(args, { cwd: path, inherit: true });
     await exec([
       "docker",
       "run",
@@ -136,7 +150,7 @@ export async function buildDocker(
       "./tmp:/opt/out",
       `${name}:latest`,
       "-c",
-      `cp ${listOfFiles} /opt/out/`,
+      `cp -r ${listOfFiles} /opt/out/`,
     ]);
 
     await exec(`nfpm pkg --packager deb --config pkgs/${name}/nfpm.yaml`, {

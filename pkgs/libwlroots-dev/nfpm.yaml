@@ -1,0 +1,9 @@
+name: libwlroots-dev
+arch: amd64
+version: ${VERSION}
+homepage: https://gitlab.freedesktop.org/wlroots/wlroots
+maintainer: Hydr0 Packaging <packaging@hydr0.com>
+contents:
+  - src: tmp/wlroots/usr/local
+    dst: /usr/local
+    type: tree

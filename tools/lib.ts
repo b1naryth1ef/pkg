@@ -97,7 +97,9 @@ export type PackageDescriptionBuild = {
 export type PackageDescriptionBuildDocker = {
   type: "build-docker";
   versions: Array<string>;
-  git: string;
+  git?: string;
+  path?: string;
+  args?: Record<string, string>;
   extract: Array<string>;
 };
 export type PackageDescriptionGithubRelease = {

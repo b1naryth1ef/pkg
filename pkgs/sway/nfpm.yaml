@@ -1,0 +1,11 @@
+name: sway
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/sway/usr/local
+    dst: /usr/local
+    type: tree
+homepage: https://github.com/swaywm/sway
+maintainer: Hydr0 Packaging <packaging@hydr0.com>
+depends:
+  - libwlroots-dev >= 0.18

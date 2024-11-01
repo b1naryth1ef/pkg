@@ -18,6 +18,8 @@ This repository contains a set of tools written in [deno](https://deno.land/) or
 - nut - custom video hosting software
 - [restic](https://github.com/restic/restic) - packages the official restic release
 - [tailwindcss](https://github.com/tailwindlabs/tailwindcss) - packages the official tailwindcss release
+- [sway](https://github.com/swaywm/sway) - experimental sway window manager packaging
+- [libwlroots-dev](https://gitlab.freedesktop.org/wlroots/wlroots) - experimental wlroots window manager packaging
 
 ## installation
 

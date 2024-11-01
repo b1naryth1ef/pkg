@@ -1,6 +1,24 @@
 packages:
   discord-canary:
     type: build
+  sway:
+    type: build-docker
+    path: pkgs/sway
+    versions: ["1.10"]
+    args:
+      SWAY_VERSION: "1.10"
+      WLROOTS_VERSION: "0.18"
+    extract:
+      - /opt/sway
+  libwlroots-dev:
+    type: build-docker
+    path: pkgs/sway
+    versions: ["0.18"]
+    args:
+      SWAY_VERSION: "1.10"
+      WLROOTS_VERSION: "0.18"
+    extract:
+      - /opt/wlroots
   discord:
     type: mirror
     url: https://stable.dl2.discordapp.net/apps/linux/0.0.72/discord-0.0.72.deb
