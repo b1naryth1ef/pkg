@@ -1,0 +1,8 @@
+name: discord-wayland
+version: ${VERSION}
+maintainer: Hydr0 Packaging <packaging@hydr0.com>
+contents:
+  - src: pkgs/discord-wayland/discord.sh
+    dst: /usr/local/bin/discord
+depends:
+  - discord

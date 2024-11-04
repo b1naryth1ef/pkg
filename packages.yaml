@@ -1,6 +1,9 @@
 packages:
   discord-canary:
     type: build
+  discord-wayland:
+    type: build
+    versions: ["0.0.1"]
   sway:
     type: build-docker
     path: pkgs/sway

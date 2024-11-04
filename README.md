@@ -12,6 +12,7 @@ This repository contains a set of tools written in [deno](https://deno.land/) or
 
 - discord - redistributes the official Discord deb file to make updating easier
 - discord-canary - same as the above but for the canary release of Discord
+- discord-wayland - utility package which provides a /usr/local/bin launch override of Discord with wayland support
 - [age](https://github.com/FiloSottile/age) - mirrors the latest age from debian
 - [files](https://github.com/brngle/files) - custom file serving software
 - [yamon](https://github.com/b1naryth1ef/yamon) - custom observability tool
