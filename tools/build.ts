@@ -28,19 +28,22 @@ export type BuildCtx = {
 };
 
 export async function mirror(desc: PackageDescriptionMirror, ctx: BuildCtx) {
-  const res = await fetch(desc.url);
-  const [filename] = res.url.split("/").slice(-1);
+  for (const version of desc.versions) {
+    const url = desc.url.replaceAll("$VERSION", version);
+    const res = await fetch(url);
+    const [filename] = res.url.split("/").slice(-1);
 
-  const outPath = `apt/pool/main/${filename}`;
-  if (!ctx.force && (await exists(outPath))) {
-    return;
+    const outPath = `apt/pool/main/${filename}`;
+    if (!ctx.force && (await exists(outPath))) {
+      return;
+    }
+
+    const download = await Deno.open(`${filename}`, {
+      create: true,
+      write: true,
+    });
+    await res.body?.pipeTo(download.writable);
   }
-
-  const download = await Deno.open(`${filename}`, {
-    create: true,
-    write: true,
-  });
-  await res.body?.pipeTo(download.writable);
 }
 
 export async function githubRelease(

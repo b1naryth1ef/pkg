@@ -89,6 +89,7 @@ export type GithubReleaseFile = {
 export type PackageDescriptionMirror = {
   type: "mirror";
   url: string;
+  versions: Array<string>;
 };
 export type PackageDescriptionBuild = {
   type: "build";
