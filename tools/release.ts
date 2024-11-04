@@ -89,14 +89,13 @@ async function dpkgScanPackages() {
   Deno.chdir("apt/");
 
   const command = new Deno.Command("dpkg-scanpackages", {
-    args: ["--arch", "amd64", "pool/"],
+    args: ["--multiversion", "pool/"],
+    stderr: "inherit",
   });
 
-  const { code, stdout, stderr } = await command.output();
+  const { code, stdout } = await command.output();
   if (code !== 0) {
-    throw new Error(
-      `failed to run dpkg-scanpackages: ${new TextDecoder().decode(stderr)}`
-    );
+    throw new Error(`failed to run dpkg-scanpackages`);
   }
 
   await Deno.writeFile("dists/stable/main/binary-amd64/Packages", stdout);
