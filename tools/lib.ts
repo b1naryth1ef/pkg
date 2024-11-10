@@ -90,6 +90,7 @@ export type PackageDescriptionMirror = {
   type: "mirror";
   url: string;
   versions: Array<string>;
+  name?: string;
 };
 export type PackageDescriptionBuild = {
   type: "build";

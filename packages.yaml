@@ -26,6 +26,11 @@ packages:
     type: mirror
     versions: ["0.0.73"]
     url: https://stable.dl2.discordapp.net/apps/linux/$VERSION/discord-$VERSION.deb
+  obsidian:
+    type: mirror
+    versions: ["1.7.5"]
+    url: https://github.com/obsidianmd/obsidian-releases/releases/download/v$VERSION/obsidian_$VERSION_amd64.deb
+    name: obsidian_$VERSION_amd64.deb
   age:
     type: mirror
     versions: ["1.2.0-1"]

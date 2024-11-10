@@ -31,7 +31,14 @@ export async function mirror(desc: PackageDescriptionMirror, ctx: BuildCtx) {
   for (const version of desc.versions) {
     const url = desc.url.replaceAll("$VERSION", version);
     const res = await fetch(url);
-    const [filename] = res.url.split("/").slice(-1);
+
+    let filename;
+    if (desc.name) {
+      filename = desc.name.replaceAll("$VERSION", version);
+    } else {
+      const resURL = new URL(res.url);
+      [filename] = resURL.pathname.split("/").slice(-1);
+    }
 
     const outPath = `apt/pool/main/${filename}`;
     if (!ctx.force && (await exists(outPath))) {
@@ -49,7 +56,7 @@ export async function mirror(desc: PackageDescriptionMirror, ctx: BuildCtx) {
 export async function githubRelease(
   name: string,
   desc: PackageDescriptionGithubRelease,
-  ctx: BuildCtx
+  ctx: BuildCtx,
 ) {
   for (const version of desc.versions) {
     const outPath = `apt/pool/main/${name}_${version}_amd64.deb`;
@@ -58,20 +65,20 @@ export async function githubRelease(
     }
 
     const res = await fetch(
-      `https://api.github.com/repos/${desc.repo}/releases/tags/v${version}`
+      `https://api.github.com/repos/${desc.repo}/releases/tags/v${version}`,
     );
     if (!res.ok) {
       console.log(
-        `https://api.github.com/repos/${desc.repo}/releases/tags/v${version}`
+        `https://api.github.com/repos/${desc.repo}/releases/tags/v${version}`,
       );
       throw new Error(
-        `failed to fetch github release from ${desc.repo}: ${version}`
+        `failed to fetch github release from ${desc.repo}: ${version}`,
       );
     }
 
     const data = (await res.json()) as GithubRelease;
     const assets = new Map(
-      data.assets.map((it) => [it.name, it.browser_download_url])
+      data.assets.map((it) => [it.name, it.browser_download_url]),
     );
 
     for (const [dst, src] of Object.entries(desc.files)) {
@@ -110,7 +117,7 @@ export async function githubRelease(
 export async function buildDocker(
   name: string,
   desc: PackageDescriptionBuildDocker,
-  ctx: BuildCtx
+  ctx: BuildCtx,
 ) {
   let path;
 
@@ -124,7 +131,7 @@ export async function buildDocker(
       path = `tmp/${name}-repo`;
       if (!(await exists(path))) {
         await exec(
-          `git clone --branch v${version} ${desc.git} tmp/${name}-repo`
+          `git clone --branch v${version} ${desc.git} tmp/${name}-repo`,
         );
       } else {
         await exec(`git fetch --tags`, { cwd: path });
@@ -138,7 +145,7 @@ export async function buildDocker(
     }
 
     const buildArgs = Object.entries(desc.args || {}).map(
-      ([k, v]) => `--build-arg=${k}=${v}`
+      ([k, v]) => `--build-arg=${k}=${v}`,
     );
     const args = ["docker", "build", "-t", `${name}:latest`, ...buildArgs, "."];
 
@@ -167,7 +174,7 @@ export async function buildDocker(
 export async function build(
   name: string,
   desc: PackageDescriptionBuild,
-  ctx: BuildCtx
+  ctx: BuildCtx,
 ) {
   // deno-lint-ignore no-explicit-any
   const exports = (await import(`../pkgs/${name}/build.ts`)) as any;
@@ -199,9 +206,11 @@ async function runBuild(name: string, desc: PackageDescription, ctx: BuildCtx) {
     throw new Error(`unsupported package build type '${desc}'`);
   }
   console.log(
-    `  built package ${name} in ${((performance.now() - start) / 1000).toFixed(
-      2
-    )}s`
+    `  built package ${name} in ${
+      ((performance.now() - start) / 1000).toFixed(
+        2,
+      )
+    }s`,
   );
 }
 
@@ -220,7 +229,7 @@ export async function main() {
   await Promise.all(
     Object.entries(packages)
       .filter(([name]) => flags["_"].length === 0 || flags["_"].includes(name))
-      .map(([name, desc]) => runBuild(name, desc, ctx))
+      .map(([name, desc]) => runBuild(name, desc, ctx)),
   );
 
   for await (const dirEntry of Deno.readDir(".")) {
