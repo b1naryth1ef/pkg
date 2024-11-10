@@ -43,7 +43,7 @@ packages:
       - /bin/files-web-server
   yamon:
     type: build-docker
-    versions: ["1.0.0"]
+    versions: ["1.0.1"]
     git: https://github.com/b1naryth1ef/yamon.git
     extract:
       - /bin/yamon-server
@@ -63,8 +63,7 @@ packages:
       restic.bz2:
         {
           name: restic_$VERSION_linux_amd64.bz2,
-          postProcess:
-            ["bzip2 -df tmp/restic.bz2", "chmod +x tmp/restic"],
+          postProcess: ["bzip2 -df tmp/restic.bz2", "chmod +x tmp/restic"],
         }
   tailwindcss:
     type: github-release
