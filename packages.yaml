@@ -4,6 +4,10 @@ packages:
   discord-wayland:
     type: build
     versions: ["0.0.1"]
+  minecraft-launcher:
+    type: mirror
+    versions: ["latest"]
+    url: https://launcher.mojang.com/download/Minecraft.deb
   sway:
     type: build-docker
     path: pkgs/sway
