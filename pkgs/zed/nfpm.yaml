@@ -1,0 +1,7 @@
+name: zed
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/zed.app
+    dst: /usr/
+    type: tree

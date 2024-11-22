@@ -86,3 +86,16 @@ packages:
     versionPrefix: "release-"
     files:
       - "x86_64-qbittorrent-nox"
+  zed:
+    type: github-release
+    repo: zed-industries/zed
+    versions: ["0.162.3"]
+    files:
+      zed-linux-x86_64.tar.gz:
+        {
+          name: "zed-linux-x86_64.tar.gz",
+          postProcess: [
+            "tar xzvf tmp/zed-linux-x86_64.tar.gz",
+            "rm tmp/zed.app/licenses.md",
+          ],
+        }
