@@ -79,3 +79,10 @@ packages:
           name: tailwindcss-linux-x64,
           postProcess: ["chmod +x tmp/tailwindcss"],
         }
+  qbittorrent-nox-static:
+    type: github-release
+    repo: userdocs/qbittorrent-nox-static
+    versions: ["5.0.2_v2.0.10"]
+    versionPrefix: "release-"
+    files:
+      - "x86_64-qbittorrent-nox"

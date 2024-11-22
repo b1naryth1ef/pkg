@@ -107,8 +107,9 @@ export type PackageDescriptionBuildDocker = {
 export type PackageDescriptionGithubRelease = {
   type: "github-release";
   versions: Array<string>;
+  versionPrefix?: string;
   repo: string;
-  files: Record<string, GithubReleaseFile>;
+  files: Record<string, GithubReleaseFile> | Array<string>;
 };
 export type PackageDescription =
   | PackageDescriptionMirror

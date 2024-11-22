@@ -58,18 +58,23 @@ export async function githubRelease(
   desc: PackageDescriptionGithubRelease,
   ctx: BuildCtx,
 ) {
-  for (const version of desc.versions) {
+  for (let version of desc.versions) {
     const outPath = `apt/pool/main/${name}_${version}_amd64.deb`;
     if (!ctx.force && (await exists(outPath))) {
       continue;
     }
 
+    if (desc.versionPrefix === undefined) {
+      version = 'v' + version;
+    } else {
+      version = desc.versionPrefix + version;
+    }
     const res = await fetch(
-      `https://api.github.com/repos/${desc.repo}/releases/tags/v${version}`,
+      `https://api.github.com/repos/${desc.repo}/releases/tags/${version}`,
     );
     if (!res.ok) {
       console.log(
-        `https://api.github.com/repos/${desc.repo}/releases/tags/v${version}`,
+        `https://api.github.com/repos/${desc.repo}/releases/tags/${version}`,
       );
       throw new Error(
         `failed to fetch github release from ${desc.repo}: ${version}`,
@@ -81,7 +86,14 @@ export async function githubRelease(
       data.assets.map((it) => [it.name, it.browser_download_url]),
     );
 
-    for (const [dst, src] of Object.entries(desc.files)) {
+    let files;
+    if (Array.isArray(desc.files)) {
+      files = Object.fromEntries(desc.files.map((it) => [it, { name: it, postProcess: undefined }]));
+    } else {
+      files = desc.files;
+    }
+
+    for (const [dst, src] of Object.entries(files)) {
       const url = assets.get(src.name.replaceAll("$VERSION", version));
       if (!url) {
         throw new Error(`failed to find file dst=${dst} src=${src}`);
@@ -149,19 +161,22 @@ export async function buildDocker(
     );
     const args = ["docker", "build", "-t", `${name}:latest`, ...buildArgs, "."];
 
-    const listOfFiles = desc.extract.join(" ");
     await exec(args, { cwd: path });
-    await exec([
-      "docker",
-      "run",
-      "--entrypoint",
-      "/bin/sh",
-      "-v",
-      "./tmp:/opt/out",
-      `${name}:latest`,
-      "-c",
-      `cp -r ${listOfFiles} /opt/out/`,
-    ]);
+
+    const listOfFiles = desc.extract.join(" ");
+    if (listOfFiles.length > 0) {
+      await exec([
+        "docker",
+        "run",
+        "--entrypoint",
+        "/bin/sh",
+        "-v",
+        "./tmp:/opt/out",
+        `${name}:latest`,
+        "-c",
+        `cp -r ${listOfFiles} /opt/out/`,
+      ]);
+    }
 
     await exec(`nfpm pkg --packager deb --config pkgs/${name}/nfpm.yaml`, {
       env: {

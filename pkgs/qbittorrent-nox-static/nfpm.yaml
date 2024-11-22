@@ -1,0 +1,6 @@
+name: qbittorrent-nox-static
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/x86_64-qbittorrent-nox
+    dst: /usr/bin/qbittorrent-nox-static
