@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pkg</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pkg</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-  <div class="h-screen bg-blue-500">
-    <div class="flex flex-row items-center">
-      <h1 class="text-3xl font-bold font-mono text-white p-2">pkg</h1>
-      <div class="ml-auto p-2 flex flex-row gap-2">
-        <a class="p-2 text-zinc-700 bg-blue-200 border-blue-700 border rounded-md hover:bg-blue-300"
-        href="/apt/pool/main/">
-        Packages 
-        </a>
-        <a class="p-2 text-zinc-700 bg-green-200 border-green-700 border rounded-md hover:bg-green-300"
-          href="/hydr0-pkg-repo_1.0.0_amd64.deb">Download Bootstrap Package</a>
+  <body>
+    <div class="h-screen bg-blue-500">
+      <div class="flex flex-row items-center">
+        <h1 class="text-3xl font-bold font-mono text-white p-2">pkg</h1>
+        <div class="ml-auto p-2 flex flex-row gap-2">
+          <a
+            class="p-2 text-zinc-700 bg-blue-200 border-blue-700 border rounded-md hover:bg-blue-300"
+            href="/apt/pool/main/"
+          >
+            Packages
+          </a>
+          <a
+            class="p-2 text-zinc-700 bg-green-200 border-green-700 border rounded-md hover:bg-green-300"
+            href="/hydr0-pkg-repo_1.0.0_amd64.deb"
+          >Download Bootstrap Package</a>
+        </div>
       </div>
-    </div>
-    <pre class="text-zinc-50 bg-zinc-700 border border-zinc-800 rounded-sm p-2 select-all">
+      <pre
+        class="text-zinc-50 bg-zinc-700 border border-zinc-800 rounded-sm p-2 select-all"
+      >
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/hydr0.gpg] http://pkg.hydr0.com/apt stable main" | sudo tee /etc/apt/sources.list.d/hydr0.list
-curl https://pkg.hydr0.com/public.key | sudo gpg --dearmour -o /usr/share/keyrings/hydr0.gpg</pre>
-<div class="h-full bg-zinc-200">
-
-</div>
-  </div>
-</body>
-
+curl https://pkg.hydr0.com/public.key | sudo gpg --dearmour -o /usr/share/keyrings/hydr0.gpg</pre
+      >
+      <div class="h-full bg-zinc-200"></div>
+    </div>
+  </body>
 </html>
