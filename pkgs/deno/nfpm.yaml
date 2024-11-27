@@ -1,0 +1,6 @@
+name: deno
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/deno
+    dst: /usr/bin/deno
