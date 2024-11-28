@@ -58,16 +58,15 @@ export async function githubRelease(
   desc: PackageDescriptionGithubRelease,
   ctx: BuildCtx,
 ) {
-  for (let version of desc.versions) {
-    const outPath = `apt/pool/main/${name}_${version}_amd64.deb`;
+  for (const rawVersion of desc.versions) {
+    const outPath = `apt/pool/main/${name}_${rawVersion}_amd64.deb`;
     if (!ctx.force && (await exists(outPath))) {
       continue;
     }
 
-    if (desc.versionPrefix === undefined) {
-      version = 'v' + version;
-    } else {
-      version = desc.versionPrefix + version;
+    let version = 'v' + rawVersion;
+    if (desc.versionPrefix) {
+      version = desc.versionPrefix + rawVersion;
     }
     const res = await fetch(
       `https://api.github.com/repos/${desc.repo}/releases/tags/${version}`,
@@ -94,9 +93,10 @@ export async function githubRelease(
     }
 
     for (const [dst, src] of Object.entries(files)) {
-      const url = assets.get(src.name.replaceAll("$VERSION", version));
+      const srcName = src.name.replaceAll("$VERSION", rawVersion);
+      const url = assets.get(srcName);
       if (!url) {
-        throw new Error(`failed to find file dst=${dst} src=${src}`);
+        throw new Error(`failed to find file dst=${dst} src=${srcName}`);
       }
 
       const assetOutPath = `tmp/${dst}`;
@@ -120,7 +120,7 @@ export async function githubRelease(
 
     await exec(`nfpm pkg --packager deb --config pkgs/${name}/nfpm.yaml`, {
       env: {
-        VERSION: version,
+        VERSION: rawVersion,
       },
     });
   }

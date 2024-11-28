@@ -11,7 +11,7 @@ packages:
   sway:
     type: build-docker
     path: pkgs/sway
-    versions: ["1.10"]
+    versions: ["1.10.0"]
     args:
       SWAY_VERSION: "1.10"
       WLROOTS_VERSION: "0.18"
@@ -20,7 +20,7 @@ packages:
   libwlroots-dev:
     type: build-docker
     path: pkgs/sway
-    versions: ["0.18"]
+    versions: ["0.18.0"]
     args:
       SWAY_VERSION: "1.10"
       WLROOTS_VERSION: "0.18"
@@ -32,7 +32,7 @@ packages:
     url: https://stable.dl2.discordapp.net/apps/linux/$VERSION/discord-$VERSION.deb
   obsidian:
     type: mirror
-    versions: ["1.7.5"]
+    versions: ["1.7.7"]
     url: https://github.com/obsidianmd/obsidian-releases/releases/download/v$VERSION/obsidian_$VERSION_amd64.deb
     name: obsidian_$VERSION_amd64.deb
   age:
@@ -71,17 +71,17 @@ packages:
   restic:
     type: github-release
     repo: restic/restic
-    versions: [0.17.2]
+    versions: [0.17.3]
     files:
       restic.bz2:
         {
-          name: restic_$VERSION_linux_amd64.bz2,
+          name: restic_$RAWVERSION_linux_amd64.bz2,
           postProcess: ["bzip2 -df tmp/restic.bz2", "chmod +x tmp/restic"],
         }
   tailwindcss:
     type: github-release
     repo: tailwindlabs/tailwindcss
-    versions: ["3.4.14"]
+    versions: ["3.4.15"]
     files:
       tailwindcss:
         {
