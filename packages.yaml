@@ -75,7 +75,7 @@ packages:
     files:
       restic.bz2:
         {
-          name: restic_$RAWVERSION_linux_amd64.bz2,
+          name: restic_v$VERSION_linux_amd64.bz2,
           postProcess: ["bzip2 -df tmp/restic.bz2", "chmod +x tmp/restic"],
         }
   tailwindcss:
