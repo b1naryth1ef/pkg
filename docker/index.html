@@ -1,36 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-dvh">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pkg</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-
-  <body>
-    <div class="h-screen bg-blue-500">
-      <div class="flex flex-row items-center">
-        <h1 class="text-3xl font-bold font-mono text-white p-2">pkg</h1>
-        <div class="ml-auto p-2 flex flex-row gap-2">
-          <a
-            class="p-2 text-zinc-700 bg-blue-200 border-blue-700 border rounded-md hover:bg-blue-300"
-            href="/apt/pool/main/"
-          >
-            Packages
-          </a>
-          <a
-            class="p-2 text-zinc-700 bg-green-200 border-green-700 border rounded-md hover:bg-green-300"
-            href="/hydr0-pkg-repo_1.0.0_amd64.deb"
-          >Download Bootstrap Package</a>
-        </div>
+  <body class="flex min-h-full flex-col w-full mx-auto max-w-screen-lg gap-4">
+    <header class="flex flex-row items-center">
+      <h1 class="text-2xl font-bold">hydr0 apt repository</h1>
+      <div class="flex flex-row ml-auto gap-2 items-center">
+        <a class="text-blue-500 hover:text-blue-400 hover:underline" href="/apt/pool/main">pool</a>
+        <a class="text-blue-500 hover:text-blue-400 hover:underline" href="/hydr0-pkg-repo_1.0.0_amd64.deb">bootstrap</a>
       </div>
-      <pre
-        class="text-zinc-50 bg-zinc-700 border border-zinc-800 rounded-sm p-2 select-all"
-      >
+    </header>
+    <main class="grow">
+      <div class="flex flex-col gap-2">
+        <p>
+          This is the hydr0 apt package repository which contains various packages that are open for public use. Packages are built using a well-defined schema and set of tooling maintained at <a class="text-blue-500 hover:text-blue-400 hover:underline" href="https://github.com/b1naryth1ef/apt">b1naryth1ef/apt</a>.
+        </p>
+        <h3 class="text-xl mt-2">Bootstrap Package Installation</h3>
+        <p>
+          We provide a <a class="text-blue-500 hover:text-blue-400 hover:underline" href="/hydr0-pkg-repo_1.0.0_amd64.deb">bootstrap package</a> that can be downloaded and used to configure the apt repository from a simple deb file.
+
+          This package includes an override which places packages from this repository at a higher priority than others to ensure they override system packages. If you don't want this please use the manual method described below.
+        </p>
+        <h3 class="text-xl mt-2">Manual Setup</h3>
+        <p>
+          To manually setup the repository simply run the commands below.
+        </p>
+        <pre
+          class="text-zinc-50 bg-zinc-700 border border-zinc-900 rounded-sm p-2 select-all text-xs"
+        >
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/hydr0.gpg] http://pkg.hydr0.com/apt stable main" | sudo tee /etc/apt/sources.list.d/hydr0.list
 curl https://pkg.hydr0.com/public.key | sudo gpg --dearmour -o /usr/share/keyrings/hydr0.gpg</pre
-      >
-      <div class="h-full bg-zinc-200"></div>
-    </div>
+        >
+        </div>
+    </main>
   </body>
 </html>
