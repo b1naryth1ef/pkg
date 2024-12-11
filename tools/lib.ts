@@ -108,6 +108,7 @@ export type PackageDescriptionGithubRelease = {
   type: "github-release";
   versions: Array<string>;
   versionPrefix?: string;
+  semver?: boolean;
   repo: string;
   files: Record<string, GithubReleaseFile> | Array<string>;
 };

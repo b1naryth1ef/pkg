@@ -93,5 +93,6 @@ packages:
     repo: userdocs/qbittorrent-nox-static
     versions: ["5.0.2_v2.0.10"]
     versionPrefix: "release-"
+    semver: false
     files:
       - "x86_64-qbittorrent-nox"
