@@ -62,11 +62,11 @@ packages:
   deno:
     type: github-release
     repo: denoland/deno
-    versions: ["2.1.1"]
+    versions: ["2.1.3"]
     files:
       deno.zip: {
         name: "deno-x86_64-unknown-linux-gnu.zip",
-        postProcess: ["unzip tmp/deno.zip -d tmp/", "chmod +x tmp/deno"],
+        postProcess: ["unzip -o tmp/deno.zip -d tmp/", "chmod +x tmp/deno"],
       }
   restic:
     type: github-release
