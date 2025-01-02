@@ -37,8 +37,8 @@ packages:
     name: obsidian_$VERSION_amd64.deb
   age:
     type: mirror
-    versions: ["1.2.0-1"]
-    url: http://launchpadlibrarian.net/756688378/age_$VERSION_amd64.deb
+    versions: ["1.2.1-1"]
+    url: https://launchpadlibrarian.net/764719494/age_$VERSION_amd64.deb
   files:
     type: build-docker
     versions: ["1.0.1"]
