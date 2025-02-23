@@ -1,11 +1,11 @@
-publish:
-  rsync -avP --delete apt/ /mnt/transmission/apt/
-
 build:
   ./tools/build.ts
 
-release:
+copy-files:
+  rsync -avP --delete apt/ /mnt/transmission/apt/
+
+sign-release:
   ./tools/release.ts --sign
 
-
-all: build release publish
+publish: sign-release copy-files
+all: build publish
