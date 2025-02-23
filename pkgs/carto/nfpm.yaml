@@ -1,0 +1,6 @@
+name: carto
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/carto
+    dst: /usr/bin/carto

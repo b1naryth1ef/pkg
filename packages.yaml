@@ -39,6 +39,12 @@ packages:
     type: mirror
     versions: ["1.2.1-1"]
     url: https://launchpadlibrarian.net/764719494/age_$VERSION_amd64.deb
+  carto:
+    type: build-docker
+    versions: ["0.0.2"]
+    git: https://github.com/b1naryth1ef/carto.git
+    extract:
+      - /bin/carto
   files:
     type: build-docker
     versions: ["1.0.1"]
