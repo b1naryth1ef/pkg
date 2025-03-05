@@ -68,7 +68,7 @@ packages:
   deno:
     type: github-release
     repo: denoland/deno
-    versions: ["2.2.2"]
+    versions: ["2.2.3"]
     files:
       deno.zip: {
         name: "deno-x86_64-unknown-linux-gnu.zip",
