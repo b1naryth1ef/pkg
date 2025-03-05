@@ -61,7 +61,7 @@ packages:
       - /bin/yamon-debug
   nut:
     type: build-docker
-    versions: ["1.0.3"]
+    versions: ["1.1.0"]
     git: git@github.com:b1naryth1ef/nutv2.git
     extract:
       - /bin/nut
