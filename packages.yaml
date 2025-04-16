@@ -59,12 +59,6 @@ packages:
       - /bin/yamon-server
       - /bin/yamon-agent
       - /bin/yamon-debug
-  nut:
-    type: build-docker
-    versions: ["1.1.0"]
-    git: git@github.com:b1naryth1ef/nutv2.git
-    extract:
-      - /bin/nut
   deno:
     type: github-release
     repo: denoland/deno

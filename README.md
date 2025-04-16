@@ -16,7 +16,6 @@ This repository contains a set of tools written in [deno](https://deno.land/) or
 - [age](https://github.com/FiloSottile/age) - mirrors the latest age from debian
 - [files](https://github.com/brngle/files) - custom file serving software
 - [yamon](https://github.com/b1naryth1ef/yamon) - custom observability tool
-- nut - custom video hosting software
 - [restic](https://github.com/restic/restic) - packages the official restic release
 - [tailwindcss](https://github.com/tailwindlabs/tailwindcss) - packages the official tailwindcss release
 - [sway](https://github.com/swaywm/sway) - experimental sway window manager packaging
