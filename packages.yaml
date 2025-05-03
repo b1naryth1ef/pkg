@@ -53,7 +53,7 @@ packages:
       - /bin/files-web-server
   yamon:
     type: build-docker
-    versions: ["1.1.0"]
+    versions: ["1.2.0-rc.4"]
     git: https://github.com/b1naryth1ef/yamon.git
     extract:
       - /bin/yamon-server
