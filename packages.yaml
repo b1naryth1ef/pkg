@@ -17,6 +17,12 @@ packages:
       WLROOTS_VERSION: "0.18"
     extract:
       - /opt/sway
+  coredns:
+    type: build-docker
+    path: pkgs/coredns
+    versions: ["1.12.1"]
+    extract:
+      - /usr/src/coredns/coredns
   libwlroots-dev:
     type: build-docker
     path: pkgs/sway

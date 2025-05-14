@@ -64,7 +64,7 @@ export async function githubRelease(
       continue;
     }
 
-    let version = 'v' + rawVersion;
+    let version = "v" + rawVersion;
     if (desc.versionPrefix) {
       version = desc.versionPrefix + rawVersion;
     }
@@ -87,7 +87,9 @@ export async function githubRelease(
 
     let files;
     if (Array.isArray(desc.files)) {
-      files = Object.fromEntries(desc.files.map((it) => [it, { name: it, postProcess: undefined }]));
+      files = Object.fromEntries(
+        desc.files.map((it) => [it, { name: it, postProcess: undefined }]),
+      );
     } else {
       files = desc.files;
     }
@@ -159,7 +161,15 @@ export async function buildDocker(
     const buildArgs = Object.entries(desc.args || {}).map(
       ([k, v]) => `--build-arg=${k}=${v}`,
     );
-    const args = ["docker", "build", "-t", `${name}:latest`, ...buildArgs, "."];
+    const args = [
+      "docker",
+      "build",
+      "-t",
+      `${name}:latest`,
+      `--build-arg=VERSION=${version}`,
+      ...buildArgs,
+      ".",
+    ];
 
     await exec(args, { cwd: path });
 
