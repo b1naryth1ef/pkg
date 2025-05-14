@@ -19,7 +19,7 @@ export async function goBuild(target: string, cwd?: string) {
   const { code, stderr } = await command.output();
   if (code !== 0) {
     throw new Error(
-      `failed to run go build: ${new TextDecoder().decode(stderr)}`
+      `failed to run go build: ${new TextDecoder().decode(stderr)}`,
     );
   }
 }
@@ -38,7 +38,7 @@ type ExecResult = {
 
 export async function exec(
   args: string | Array<string>,
-  opts?: ExecOpts
+  opts?: ExecOpts,
 ): Promise<ExecResult> {
   if (!Array.isArray(args)) {
     args = args.split(" ");
@@ -70,7 +70,7 @@ export async function exec(
   if (code !== 0) {
     console.log(new TextDecoder().decode(stdout));
     throw new Error(
-      `failed to exec '${args.join(" ")}: ${new TextDecoder().decode(stderr)}`
+      `failed to exec '${args.join(" ")}: ${new TextDecoder().decode(stderr)}`,
     );
   }
 
@@ -112,11 +112,20 @@ export type PackageDescriptionGithubRelease = {
   repo: string;
   files: Record<string, GithubReleaseFile> | Array<string>;
 };
+export type PackageDescriptionMeta = {
+  prune?: {
+    keep?: number;
+    skip?: boolean;
+  };
+};
 export type PackageDescription =
-  | PackageDescriptionMirror
-  | PackageDescriptionBuild
-  | PackageDescriptionBuildDocker
-  | PackageDescriptionGithubRelease;
+  & (
+    | PackageDescriptionMirror
+    | PackageDescriptionBuild
+    | PackageDescriptionBuildDocker
+    | PackageDescriptionGithubRelease
+  )
+  & PackageDescriptionMeta;
 export type Packages = Record<string, PackageDescription>;
 
 export async function loadPackages(): Promise<Packages> {

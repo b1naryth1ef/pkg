@@ -1,6 +1,8 @@
 packages:
   discord-canary:
     type: build
+    prune:
+      keep: 1
   discord-wayland:
     type: build
     versions: ["0.0.1"]
@@ -59,6 +61,8 @@ packages:
       - /bin/yamon-server
       - /bin/yamon-agent
       - /bin/yamon-debug
+    prune:
+      skip: true # skip this because it uses invalid versions
   deno:
     type: github-release
     repo: denoland/deno
@@ -96,3 +100,5 @@ packages:
     semver: false
     files:
       - "x86_64-qbittorrent-nox"
+    prune:
+      skip: true # skip this because it uses invalid versions
