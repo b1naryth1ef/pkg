@@ -1,0 +1,8 @@
+name: coredns
+arch: amd64
+version: ${VERSION}
+contents:
+  - src: tmp/coredns
+    dst: /usr/bin/coredns
+homepage: https://coredns.io 
+maintainer: Hydr0 Packaging <packaging@hydr0.com>
