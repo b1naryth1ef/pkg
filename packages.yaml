@@ -28,7 +28,7 @@ packages:
       - /opt/wlroots
   discord:
     type: mirror
-    versions: ["0.0.93"]
+    versions: ["0.0.94"]
     url: https://stable.dl2.discordapp.net/apps/linux/$VERSION/discord-$VERSION.deb
   obsidian:
     type: mirror
