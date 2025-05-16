@@ -91,7 +91,7 @@ packages:
   tailwindcss:
     type: github-release
     repo: tailwindlabs/tailwindcss
-    versions: ["4.1.6"]
+    versions: ["4.1.7"]
     files:
       tailwindcss:
         {
