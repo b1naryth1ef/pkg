@@ -81,7 +81,7 @@ packages:
   restic:
     type: github-release
     repo: restic/restic
-    versions: [0.18.0]
+    versions: [0.18.1]
     files:
       restic.bz2:
         {
